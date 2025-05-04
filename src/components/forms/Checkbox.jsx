@@ -12,7 +12,7 @@ export function Checkbox({checked, onChange, label, id}) {
         type="checkbox" 
         className="form-check-input" 
         checked={checked}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => onChange(e.target.checked)}
         />
         <label htmlFor={id} className="form-checked-label">{label}</label>
     </div>

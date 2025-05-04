@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Input } from "./components/forms/Input.jsx"
 import { Checkbox } from "./components/forms/Checkbox.jsx"
 import { ProductCategoryRow } from "./components/products/ProductCategoryRow.jsx"
@@ -13,25 +14,41 @@ const PRODUCTS = [
   {category: "Vegetables", price: "$1", stocked: true, name: "Peas"}
 ];
 
+// TODO: Essyer de rajouter une range bar pour trier les produits par prix
+
 function App() {
+  const [showStockedOnly, setShowStockedOnly] = useState(false);
+  const [search, setSearch] = useState('');
+
+  const visibleProducts = PRODUCTS.filter(product => {
+    if (showStockedOnly && !product.stocked) {
+      return false
+    }
+
+    if (search && !product.name.includes(search)) {
+      return false
+    }
+    return true
+  })
+
   return <div className="container my-3">
-    <SearchBar/>
-    <ProductTable products={PRODUCTS}/>
+    <SearchBar showStockedOnly={showStockedOnly} onStockedOnlyChange={setShowStockedOnly} search={search} onSearchChange={setSearch}/>
+    <ProductTable products={visibleProducts}/>
   </div>
 }
 
-function SearchBar () {
+function SearchBar ({showStockedOnly, onStockedOnlyChange, search, onSearchChange}) {
   return <div>
     <div className="mb-3">
       <Input 
-        value="" 
-        onChange={() => null} 
+        value={search} 
+        onChange={onSearchChange} 
         placeHolder="Rechercher..."
       />
       <Checkbox
         id="stocked"
-        checked={false}
-        onChange={() => null}
+        checked={showStockedOnly}
+        onChange={onStockedOnlyChange}
         label="N'afficher que les produits en stock"
       />
     </div>
