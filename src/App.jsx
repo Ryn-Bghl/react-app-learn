@@ -26,6 +26,7 @@ function SearchBar () {
         placeHolder="Rechercher..."
       />
       <Checkbox
+        id="stocked"
         checked={false}
         onChange={() => null}
         label="N'afficher que les produits en stock"
