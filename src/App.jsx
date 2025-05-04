@@ -1,8 +1,6 @@
 // const title = "Bonjour les gens";
 // const style = {color: 'white', backgroundColor: 'black'};
 
-import { useState } from "react";
-
 // const showTitle = false;
 // const todos = [
 //   'Présenter react',
@@ -12,27 +10,15 @@ import { useState } from "react";
 
 function App() {
 
-  const [person, setPerson] = useState({
-    firstName: 'John',
-    lastName: 'Doe',
-    age: 18
-  })
-
-  const [count, setCount] = useState(0)
-  
-  const incrementAge = () => {
-    setPerson({...person, age: person.age + 1})
-  };
-
-  const incrementCount = () => {
-    setCount(count + 1)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(new FormData(e.target));
   }
 
-  return <>
-    <p>Age de {person.firstName}: {person.age}</p>
-    <button onClick={incrementAge}>Incrémentation</button>
-    <button onClick={incrementCount}>count: {count}</button>
-  </>
+  return <form onSubmit={handleSubmit}>
+    <input  type="text" name="firstname" />
+    <button>Envoyer</button>
+  </form>
 }
 
 export default App;
