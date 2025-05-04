@@ -1,8 +1,6 @@
 // const title = "Bonjour les gens";
 // const style = {color: 'white', backgroundColor: 'black'};
 
-import { useState } from "react";
-
 // const showTitle = false;
 // const todos = [
 //   'Présenter react',
@@ -12,20 +10,14 @@ import { useState } from "react";
 
 function App() {
 
-  const [firstname, setFirstname] = useState('John doe')
-
-  const handleChange = (e) => {
-    setFirstname(e.target.value)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(new FormData(e.target));
   }
 
-  const reset = () => {
-    setFirstname('')
-  }
-
-  return <form>
-    <input onChange={handleChange} type="text" name="firstname" value={firstname}/>
-    {firstname}
-    <button onClick={reset} type="button">Reset</button>
+  return <form onSubmit={handleSubmit}>
+    <input  type="text" name="firstname" />
+    <button>Envoyer</button>
   </form>
 }
 
