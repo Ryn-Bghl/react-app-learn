@@ -1,44 +1,38 @@
 // const title = "Bonjour les gens";
 // const style = {color: 'white', backgroundColor: 'black'};
+
+import { useState } from "react";
+
 // const showTitle = false;
-const todos = [
-  'Présenter react',
-  'Présenter le JSX', 
-  'Créer des composants'
-];
+// const todos = [
+//   'Présenter react',
+//   'Présenter le JSX', 
+//   'Créer des composants'
+// ];
 
 function App() {
-/*   const handleClick = () => {
-    alert("J'ai cliquer sur le titre !!!")
-  } */
+
+  const [person, setPerson] = useState({
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 18
+  })
+
+  const [count, setCount] = useState(0)
+  
+  const incrementAge = () => {
+    setPerson({...person, age: person.age + 1})
+  };
+
+  const incrementCount = () => {
+    setCount(count + 1)
+  }
 
   return <>
-    <Title color="red" /* hidden */>
-      <p>SAlut</p>
-    </Title>
-    <input type="text" />
-    <p>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, ad possimus assumenda animi repudiandae velit aspernatur sint, dolores ab quisquam accusamus voluptate molestiae nesciunt beatae natus cum. Veritatis, qui ab.
-    </p>
-    <ul>
-      {todos.map(todo => {
-        return <li key={todo}>{todo}</li>
-      })}
-    </ul>
+    <p>Age de {person.firstName}: {person.age}</p>
+    <button onClick={incrementAge}>Incrémentation</button>
+    <button onClick={incrementCount}>count: {count}</button>
   </>
-}
-
-function Title({color, children, hidden}) {
-  if (hidden) {
-    return null;
-  }
-
-  const props = {
-    id: 'monid',
-    className: 'maClasse'
-  }
-
-  return <h1 style={{color: color}} {...props} >{children}</h1>
 }
 
 export default App;
