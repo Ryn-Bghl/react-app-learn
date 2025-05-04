@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Input } from "./components/forms/Input.jsx"
 import { Checkbox } from "./components/forms/Checkbox.jsx"
+import { Range } from './components/forms/Range.jsx'
 import { ProductCategoryRow } from "./components/products/ProductCategoryRow.jsx"
 import { ProductRow } from './components/products/ProductRow.jsx';
 
@@ -37,7 +38,7 @@ function App() {
   </div>
 }
 
-function SearchBar ({showStockedOnly, onStockedOnlyChange, search, onSearchChange}) {
+function SearchBar ({showStockedOnly, onStockedOnlyChange, search, onSearchChange, range, onRangeChange}) {
   return <div>
     <div className="mb-3">
       <Input 
@@ -50,6 +51,11 @@ function SearchBar ({showStockedOnly, onStockedOnlyChange, search, onSearchChang
         checked={showStockedOnly}
         onChange={onStockedOnlyChange}
         label="N'afficher que les produits en stock"
+      />
+      <Range
+        id="range"
+        onChange={onRangeChange}
+        label="Trier par prix"
       />
     </div>
   </div>
