@@ -1,7 +1,7 @@
 /**
  * Range input avec un libellé sur le dessus
  * 
- * @param {s:string => void} onChange
+ * @param {n:number => void} onChange
  * @param {string} id
  * @param {string} label
  * @param {number} value
