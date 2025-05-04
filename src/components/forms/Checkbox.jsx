@@ -4,7 +4,7 @@
  * @param {string} label 
  */
 export function Checkbox({checked, onChange, label}) {
-    return <div>
+    return <div className="form-checked">
         <input 
         type="checkbox" 
         className="form-check-input" 
