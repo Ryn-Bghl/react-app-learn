@@ -1,24 +1,26 @@
-// const title = "Bonjour les gens";
-// const style = {color: 'white', backgroundColor: 'black'};
-
-// const showTitle = false;
-// const todos = [
-//   'Présenter react',
-//   'Présenter le JSX', 
-//   'Créer des composants'
-// ];
+import { useState } from "react";
 
 function App() {
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(new FormData(e.target));
-  }
+  const [isTermAccepted, setIsTermAccepted] = useState(false);
 
-  return <form onSubmit={handleSubmit}>
-    <input  type="text" name="firstname" />
-    <button>Envoyer</button>
+  return <form>
+    <CGUCheckbox checked={isTermAccepted} onCheck={setIsTermAccepted}/>
+    <button disabled={!isTermAccepted}>Envoyer</button>
   </form>
+}
+
+function CGUCheckbox({checked, onCheck}) {
+  return <div>
+    <label>
+      <input type="checkbox" 
+      onChange={(e) => {
+        onCheck(e.target.checked)
+      }}
+      checked={checked}/>
+      Accepter les conditions d'utilisation
+    </label>
+  </div>
 }
 
 export default App;
