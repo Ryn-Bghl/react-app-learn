@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Input } from "./components/forms/Input.jsx"
 import { Checkbox } from "./components/forms/Checkbox.jsx"
+import { Range } from './components/forms/Range.jsx'
 import { ProductCategoryRow } from "./components/products/ProductCategoryRow.jsx"
 import { ProductRow } from './components/products/ProductRow.jsx';
 
@@ -19,6 +20,7 @@ const PRODUCTS = [
 function App() {
   const [showStockedOnly, setShowStockedOnly] = useState(false);
   const [search, setSearch] = useState('');
+  const [range, onRangeChange] = useState(0);
 
   const visibleProducts = PRODUCTS.filter(product => {
     if (showStockedOnly && !product.stocked) {
@@ -28,16 +30,20 @@ function App() {
     if (search && !product.name.includes(search)) {
       return false
     }
+
+    if (range && !(product.price.split("")[1] >= range)){
+      return false
+    }
     return true
   })
 
   return <div className="container my-3">
-    <SearchBar showStockedOnly={showStockedOnly} onStockedOnlyChange={setShowStockedOnly} search={search} onSearchChange={setSearch}/>
+    <SearchBar showStockedOnly={showStockedOnly} onStockedOnlyChange={setShowStockedOnly} search={search} onSearchChange={setSearch} range={range} onRangeChange={onRangeChange}/>
     <ProductTable products={visibleProducts}/>
   </div>
 }
 
-function SearchBar ({showStockedOnly, onStockedOnlyChange, search, onSearchChange}) {
+function SearchBar ({showStockedOnly, onStockedOnlyChange, search, onSearchChange, range, onRangeChange}) {
   return <div>
     <div className="mb-3">
       <Input 
@@ -50,6 +56,12 @@ function SearchBar ({showStockedOnly, onStockedOnlyChange, search, onSearchChang
         checked={showStockedOnly}
         onChange={onStockedOnlyChange}
         label="N'afficher que les produits en stock"
+      />
+      <Range
+        id="range"
+        onChange={onRangeChange}
+        label={"Show products above or equal to "+range+"$"}
+        value={range}
       />
     </div>
   </div>
