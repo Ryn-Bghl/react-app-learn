@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Input } from "./components/forms/Input.jsx"
 import { Checkbox } from "./components/forms/Checkbox.jsx"
 
@@ -21,6 +21,10 @@ function App() {
 function EditTitle() {
   const [title, setTitle] = useState('')
   const [firstname, setFirstname] = useState('')
+
+  useEffect(() => {
+    document.title = title 
+  }, [title])
 
   return <div className='vstack gap-2'>
     <Input
