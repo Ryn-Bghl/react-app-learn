@@ -28,9 +28,13 @@ function EditTitle() {
   }, [title])
 
   useEffect(() => {
-    window.addEventListener('scroll', (e) => {
+    const handler = (e) => {
       setY(window.scrollY)
-    });
+    }
+    window.addEventListener('scroll', handler);
+    return () => {
+      window.removeEventListener('scroll', handler);
+    }
   }, [])
 
   return <div className='vstack gap-2'>
