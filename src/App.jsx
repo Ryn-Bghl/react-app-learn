@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Input } from "./components/forms/Input.jsx"
-import { clear } from '@testing-library/user-event/dist/clear.js';
 
 function App() {
 
