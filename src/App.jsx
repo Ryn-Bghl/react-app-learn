@@ -1,66 +1,42 @@
 import { useEffect, useState } from 'react';
 import { Input } from "./components/forms/Input.jsx"
-import { Checkbox } from "./components/forms/Checkbox.jsx"
+import { clear } from '@testing-library/user-event/dist/clear.js';
 
 function App() {
 
-  const [showInput, setShowInput] = useState(true)
+  const [time, setTime] = useState(5)
+  const [secondsLeft, setSecondsLeft] = useState(time)
 
-  return <div className='m-3'>
-  <Checkbox
-    checked={showInput}
-    onChange={setShowInput}
-    id="titleshow"
-    label="Afficher le champ titre"
-  />
-  {showInput && <EditTitle/>}
-  <div style={{height: '300vh'}}></div>
-</div>
-}
-
-function EditTitle() {
-  const [title, setTitle] = useState('')
-  const [firstname, setFirstname] = useState('')
-  const [y, setY] = useState(0);
+  const handleChange = (v) => {
+    setTime(v)
+    setSecondsLeft(v)
+  }
 
   useEffect(() => {
-    console.log('render edittitle')
-    const originalTitle = document.title
+    const timer = setInterval(() => {
+      setSecondsLeft(
+        (sec) => {
+          if (sec <= 1) {
+            clearInterval()
+            return 0
+          }
+          return sec-1;
+        }
+      )
+    }, 1000)
     return () => {
-      document.title = originalTitle
+      clearInterval(timer)
     }
-  }, [])
+  }, [time])
 
-  useEffect(() => {
-    document.title = title 
-  }, [title])
-
-  useEffect(() => {
-    const handler = (e) => {
-      setY(window.scrollY)
-    }
-    window.addEventListener('scroll', handler);
-    return () => {
-      window.removeEventListener('scroll', handler);
-    }
-  }, [])
-
-  return <div className='vstack gap-2'>
+  return   <div className='m-3 vstack gap-2'>
     <Input
-      placeHolder="Modifier le titre"
-      value={title}
-      onChange={setTitle}
+      value={time}
+      onChange={handleChange}
+      placeHolder="enter timer duration"
     />
-    <Input
-      placeHolder="Prénom"
-      value={firstname
-      }
-      onChange={setFirstname}
-    />
-    <div>
-      Scroll : {y}
-    </div>
+    <p>Décompte : {secondsLeft}</p>
   </div>
-
 }
+
 export default App;
