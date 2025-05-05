@@ -21,10 +21,17 @@ function App() {
 function EditTitle() {
   const [title, setTitle] = useState('')
   const [firstname, setFirstname] = useState('')
+  const [y, setY] = useState(0);
 
   useEffect(() => {
     document.title = title 
   }, [title])
+
+  useEffect(() => {
+    window.addEventListener('scroll', (e) => {
+      setY(window.scrollY)
+    });
+  }, [])
 
   return <div className='vstack gap-2'>
     <Input
@@ -38,6 +45,9 @@ function EditTitle() {
       }
       onChange={setFirstname}
     />
+    <div>
+      Scroll : {y}
+    </div>
   </div>
 
 }
