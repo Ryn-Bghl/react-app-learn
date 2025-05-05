@@ -24,6 +24,14 @@ function EditTitle() {
   const [y, setY] = useState(0);
 
   useEffect(() => {
+    console.log('render edittitle')
+    const originalTitle = document.title
+    return () => {
+      document.title = originalTitle
+    }
+  }, [])
+
+  useEffect(() => {
     document.title = title 
   }, [title])
 
