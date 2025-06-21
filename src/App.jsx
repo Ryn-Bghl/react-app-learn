@@ -27,6 +27,13 @@ function App() {
 }
 
 function passwordSecurity(password) {
+
+  // Fausse lenteur
+  let startTime = performance.now();
+  while (performance.now() - startTime < 200) {
+    
+  }
+
   if (password.length < 3) {
     return 'Faible'
   } else if (password.length < 6) {
