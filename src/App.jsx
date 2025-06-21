@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useId } from "react";
 import { Input } from "./components/forms/Input.jsx";
 
 function App() {
@@ -7,6 +7,8 @@ function App() {
   const security = useMemo(() => {
     return passwordSecurity(password);
   }, [password])
+
+  console.log(useId());
 
   return (
     <div className="container my-3 vstack gap-2">
