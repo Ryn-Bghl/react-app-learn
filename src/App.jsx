@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Input } from "./components/forms/Input.jsx";
 
 function App() {
   const [firstName, setFirstName] = useState("John");
   const [password, setPassword] = useState("MotDePasse");
-  const security = passwordSecurity(password);
+  const security = useMemo(() => {
+    return passwordSecurity(password);
+  }, [password])
 
   return (
     <div className="container my-3 vstack gap-2">
@@ -31,7 +33,7 @@ function passwordSecurity(password) {
   // Fausse lenteur
   let startTime = performance.now();
   while (performance.now() - startTime < 200) {
-    
+
   }
 
   if (password.length < 3) {
